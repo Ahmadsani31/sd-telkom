@@ -21,6 +21,7 @@ class VidioTestController extends Controller
 
     public function store(Request $request)
     {
+        dd($request);
         if ($request->hasFile('video')) {
 
             $file = $request->file('video');

@@ -82,9 +82,7 @@
                 <a href="{{ route('home') }}" class="logo">
                     SD-TELKOM
                 </a>
-                <div class="sidebar-toggle-box">
-                    <div class="fa fa-bars"></div>
-                </div>
+
             </div>
             <!--logo end-->
 
@@ -160,25 +158,10 @@
 
         </header>
         <!--header end-->
-        @if (Auth::user()->level == 'admin')
-            @include('layouts.admin-sidebar')
-        @endif
-
-        @if (Auth::user()->level == 'guru')
-            @include('layouts.guru-sidebar')
-        @endif
-
-        @if (Auth::user()->level == 'siswa')
-            @include('layouts.siswa-sidebar')
-        @endif
-
-        @if (Auth::user()->level == 'ortu')
-            @include('layouts.ortu-sidebar')
-        @endif
 
 
         <!--main content start-->
-        <section id="main-content">
+        <section id="main-content" class="merge-left">
 
             <section class="wrapper">
 

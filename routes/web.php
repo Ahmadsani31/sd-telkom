@@ -47,6 +47,13 @@ Route::group(['prefix' => 'siswa'], function(){
         Route::get('home','SiswaController@index')->name('siswa.home');
 
         Route::get('/sholat/index', 'SholatController@index')->name('sholat.index');
+
+        Route::get('/sholat/subuh', 'SubuhController@index')->name('sholat.subuh');
+        Route::get('/sholat/dzuhur', 'DzuhurController@index')->name('sholat.dzuhur');
+        Route::get('/sholat/ashar', 'AsharController@index')->name('sholat.ashar');
+        Route::get('/sholat/maghrib', 'MaghribController@index')->name('sholat.maghrib');
+        Route::get('/sholat/isya', 'IsyaController@index')->name('sholat.isya');
+
         Route::post('/sholat/store', 'SholatController@store')->name('sholat.store');
         Route::get('/sholat/index/dataSholat', 'SholatController@dataSholat')->name('sholat.dataSholat');
 

@@ -17,8 +17,8 @@ class CreateKosakatasTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('bahasa');
-            $table->string('kosakata');
-            $table->text('image');
+            $table->string('arti');
+            $table->text('vidio');
             $table->timestamps();
         });
     }

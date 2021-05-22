@@ -13,6 +13,6 @@ class Mengaji extends Model
                             'nama_surat',
                             'ayat_awal',
                             'ayat_akhir',
-                            'image',
+                            'vidio_ngaji',
                         ];
 }

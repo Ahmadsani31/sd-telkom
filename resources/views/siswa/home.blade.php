@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- <style>
+    .disabled {
+  pointer-events: none;
+  cursor: default;
+}
+</style> --}}
 <div class="profile-page">
 
     <div class="row profile-cover">
@@ -11,17 +17,9 @@
                 </div>
             </div>
             <div class="col-md-12 profile-info">
-                <div class=" profile-info-value">
-                    <h3>800</h3>
-                    <p>Followers</p>
-                </div>
-                <div class=" profile-info-value">
-                    <h3>1520</h3>
-                    <p>Friends</p>
-                </div>
-                <div class=" profile-info-value">
-                    <h3>340</h3>
-                    <p>Photos</p>
+                <div class="container profile-info-value">
+                    <h3>{{ Auth::user()->name }}</h3>
+                    <p>Lokal Siswa</p>
                 </div>
             </div>
         </div>
@@ -33,138 +31,278 @@
     </div>
 
     <div class="clearfix"></div>
-
     <div class="row margin-top-70">
         <!--Left Sidebar-->
-        <div class="col-md-3 margin-bottom-40" style="background:rgba(255, 255, 255, 0.5); border-right: 10px solid #F1F2F2;">
+        
+        <div class="col-md-12" style="background:rgb(27, 199, 196);">
+
+           <div class="text-center">
+            <h1><strong>Sholat lima waktu</strong> </h1>
+
+           </div>
 
 
+        </div><!--/col-md-12-->
 
-            <div class="panel-heading-2 overflow-hidden">
-                <h2 class="heading-xs pull-left"><i class="fa fa-bar-chart-o"></i> Projects Status</h2>
-                <a href="#"><i class="icon-settings pull-right"></i></a>
-            </div>
-            <h3 class="heading-xs">Wordpress Theme <span class="pull-right">40%</span></h3>
-            <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                </div>
-            </div>
-            <h3 class="heading-xs">Admin Template <span class="pull-right">85%</span></h3>
-            <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-                </div>
-            </div>
-            <h3 class="heading-xs">Laravel Project <span class="pull-right">64%</span></h3>
-            <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" style="width: 64%">
-                </div>
-            </div>
-
-            <hr>
-
-
-            <!--End Datepicker-->
-        </div><!--/col-md-3-->
         <!--End Left Sidebar-->
 
-        <div class="col-md-9" style="background:rgba(255, 255, 255, 0.5);">
+     
+    </div>
+    <div class="row ">
+        <!--Left Sidebar-->
+        
+        <div class="col-md-12 padding-top-20" style="background:rgb(27, 199, 196);">
 
-            <!--Start Profile Contacts-->
-            <div class="row margin-top-16 margin-bottom-16">
-                <div class="col-md-12">
+           
+            <div class="page-ecommerce">
 
-                    <div class="panel panel-profile">
-                        <div class="panel-heading overflow-hidden">
-                            <h2 class="panel-title heading-sm pull-left"><i class="icon-settings"></i>Bioadata</h2>
-                        </div>
-                        <div class="panel-body">
+                <div class="row" style="height: 30%">
 
-                            <div class="row settings">
+                    <div class="col-md-4">
 
-                                <div class="col-md-12">
+                        <div class="widget">
+                            <div class="widget-content bg-white">
+                                <div class="row padding-10">
+                                    <div class="col-xs-8">
+                                        <h3 class="font-bold font-size-30">Subuh</h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="font-size-38"><span class="pe-7s-alarm pull-right"></span></p>
+                                    </div>
+                                </div>
+                                <p class="margin-left-10 margin-right-10">Jadwal Sholat <b>{{ $schedule['subuh']}}</b></p>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{{ $nilai }}"></div>
+                                </div>
 
-                                        <form class="form-horizontal tabular-form margin-top-10">
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Name</label>
-                                                <div class="col-sm-10 tabular-border">
-                                                    <input type="text" class="form-control"  value="{{ Auth::user()->name }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="form-website" class="col-sm-2 control-label">Website</label>
-                                                <div class="col-sm-10 tabular-border">
-                                                    <input type="text" class="form-control" id="form-website" placeholder="http://">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Gender</label>
-                                                <div class="col-sm-10 tabular-border">
-                                                    <div class="radio block"><label><input type="radio" name="gender" class="icheck-aero" checked> Male</label></div>
-                                                    <div class="radio block"><label><input type="radio" name="gender" class="icheck-aero"> Female</label></div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="form-password" class="col-sm-2 control-label">Password</label>
-                                                <div class="col-sm-10 tabular-border">
-                                                    <input type="password" class="form-control" id="form-password" value="{{ Auth::user()->password }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="form-confirmpass" class="col-sm-2 control-label">Confrim Password</label>
-                                                <div class="col-sm-10 tabular-border">
-                                                    <input type="password" class="form-control" id="form-confirmpass" placeholder="Password">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="selector1" class="col-sm-2 control-label">Country</label>
-                                                <div class="col-sm-10 tabular-border"><select name="selector1" id="selector1" class="select2">
-                                                    <option value="Afghanistan">Afghanistan</option>
-                                                    <option value="Åland_Islands">Åland Islands</option>
-                                                    <option value="Albania">Albania</option>
-                                                    <option value="Algeria">Algeria</option>
-                                                    <option value="American_Samoa">American Samoa</option>
-                                                    <option value="Andorra">Andorra</option>
-                                                    <option value="Angola">Angola</option>
-                                                    <option value="Anguilla">Anguilla</option>
-                                                    <option value="Antarctica">Antarctica</option>
-                                                    <option value="Antigua_And_Barbuda">Antigua and Barbuda</option>
-                                                    <option value="Argentina">Argentina</option>
-                                                    <option value="Armenia">Armenia</option>
+                                @if ($nama == 'terlaksana')
+                                <a href="#" class="padding-8 hvr-bounce-to-right bg-green" style="width:100%;">Terima kasih sudah melakukan sholat <i class="fa fa-arrow-circle-right"></i></a>
+                                    
+                                @else
+                                <a href="{{ route('sholat.subuh') }}" class="padding-8 hvr-bounce-to-right bg-red" style="width:100%;">Laksanakan <i class="fa fa-arrow-circle-right"></i></a>
+                                    
+                                @endif
+                            </div><!--/widget-content--> 
+                        </div><!--/widget-->
 
-                                                </select></div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Bio</label>
-                                                <div class="col-sm-10">
-                                                    <textarea class="form-control textarea-expandable"></textarea>
-                                                </div>
-                                            </div>
-
-
-                                        </form>
-
-
-
-                                    <!--TAB END-->
-
-                                </div><!--/col-md-12-->
-
-                            </div><!--/row-->
-
-
-                        </div><!--/panel-body-->
                     </div>
 
-                </div>
+                    <div class="col-md-4">
 
-            </div><!--/row-->
-            <!--End Profile Contacts-->
+                        <div class="widget">
+                            <div class="widget-content bg-white">
+                                <div class="row padding-10">
+                                    <div class="col-xs-8">
+                                        <h3 class="font-bold font-size-30">Dzuhur</h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="font-size-38"><span class="pe-7s-settings pull-right"></span></p>
+                                    </div>
+                                </div>
+                                <p class="margin-left-10 margin-right-10">Members</p>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-green-sea" role="progressbar" data-transitiongoal="80"></div>
+                                </div>
+                                <a href="{{ route('sholat.dzuhur') }}" class="padding-8 hvr-bounce-to-right bg-green-sea" style="width:100%;">Read full report <i class="fa fa-arrow-circle-right"></i></a>
+                            </div><!--/widget-content--> 
+                        </div><!--/widget-->
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="widget">
+                            <div class="widget-content bg-white">
+                                <div class="row padding-10">
+                                    <div class="col-xs-8">
+                                        <h3 class="font-bold font-size-30">Ashar</h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="font-size-38"><span class="pe-7s-like2 pull-right"></span></p>
+                                    </div>
+                                </div>
+                                <p class="margin-left-10 margin-right-10">Revenue</p>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-sun-flower" role="progressbar" data-transitiongoal="90"></div>
+                                </div>
+                                <a href="#" class="padding-8 hvr-bounce-to-right bg-sun-flower" style="width:100%;">Read full report <i class="fa fa-arrow-circle-right"></i></a>
+                            </div><!--/widget-content--> 
+                        </div><!--/widget-->
+
+                    </div>
 
 
-        </div>
+                </div><!-- .row -->
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+
+                        <div class="widget">
+                            <div class="widget-content bg-white">
+                                <div class="row padding-10">
+                                    <div class="col-xs-8">
+                                        <h3 class="font-bold font-size-30">Maghrib</h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="font-size-38"><span class="pe-7s-alarm pull-right"></span></p>
+                                    </div>
+                                </div>
+                                <p class="margin-left-10 margin-right-10">Open Orders</p>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-amethyst" role="progressbar" data-transitiongoal="64"></div>
+                                </div>
+                                <a href="#" class="padding-8 hvr-bounce-to-right bg-amethyst" style="width:100%;">Laksanakan <i class="fa fa-arrow-circle-right"></i></a>
+                            </div><!--/widget-content--> 
+                        </div><!--/widget-->
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="widget">
+                            <div class="widget-content bg-white">
+                                <div class="row padding-10">
+                                    <div class="col-xs-8">
+                                        <h3 class="font-bold font-size-30">Isya</h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="font-size-38"><span class="pe-7s-settings pull-right"></span></p>
+                                    </div>
+                                </div>
+                                <p class="margin-left-10 margin-right-10">Members</p>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-alizarin" role="progressbar" data-transitiongoal="80"></div>
+                                </div>
+                                <a href="{{ route('vidio-test') }}" class="padding-8 hvr-bounce-to-right bg-alizarin" style="width:100%;">Read full report <i class="fa fa-arrow-circle-right"></i></a>
+                            </div><!--/widget-content--> 
+                        </div><!--/widget-->
+
+                    </div>
+
+
+                    <div class="col-md-2"></div>
+
+
+                </div><!-- .row -->
+
+
+                
+            </div><!--/all-projects-->
+
+
+        </div><!--/col-md-12-->
+
+        <!--End Left Sidebar-->
+
+     
     </div>
+    <div class="clearfix"></div>
+    <div class="row margin-top-70">
+        <!--Left Sidebar-->
+        
+        <div class="col-md-12" style="background:rgb(191, 236, 26);">
 
+           <div class="text-center">
+            <h1><strong>Kegiatan setelah Sholat</strong> </h1>
+
+           </div>
+
+
+        </div><!--/col-md-12-->
+
+        <!--End Left Sidebar-->
+
+     
+    </div>
+    <div class="row">
+        <!--Left Sidebar-->
+        
+        <div class="col-md-12 padding-top-20" style="background:rgb(191, 236, 26);">
+
+           
+            <div class="page-ecommerce">
+
+                <div class="row" style="height: 30%">
+
+                    <div class="col-md-4 disable">
+
+                        <div class="widget" id="data">
+                            <div class="widget-content bg-white">
+                                <div class="row padding-10">
+                                    <div class="col-xs-8">
+                                        <h3 class="font-bold font-size-30">Mengaji</h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="font-size-38"><span class="pe-7s-alarm pull-right"></span></p>
+                                    </div>
+                                </div>
+                                <p class="margin-left-10 margin-right-10">Open Orders</p>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-sun-flower" role="progressbar" data-transitiongoal="64"></div>
+                                </div>
+                                <a href="{{ route('mengaji.created') }}" id="" class="disabled padding-8 hvr-bounce-to-right bg-sun-flower" style="width:100%;">Laksanakan <i class="fa fa-arrow-circle-right"></i></a>
+                            </div><!--/widget-content--> 
+                        </div><!--/widget-->
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="widget">
+                            <div class="widget-content bg-white">
+                                <div class="row padding-10">
+                                    <div class="col-xs-8">
+                                        <h3 class="font-bold font-size-30">Literasi</h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="font-size-38"><span class="pe-7s-settings pull-right"></span></p>
+                                    </div>
+                                </div>
+                                <p class="margin-left-10 margin-right-10">Members</p>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-midnight-blue" role="progressbar" data-transitiongoal="80"></div>
+                                </div>
+                                <a href="{{ route('literasi.created') }}" class="padding-8 hvr-bounce-to-right bg-midnight-blue" style="width:100%;">Read full report <i class="fa fa-arrow-circle-right"></i></a>
+                            </div><!--/widget-content--> 
+                        </div><!--/widget-->
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="widget">
+                            <div class="widget-content bg-white">
+                                <div class="row padding-10">
+                                    <div class="col-xs-8">
+                                        <h3 class="font-bold font-size-30">Kosa Kata</h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="font-size-38"><span class="pe-7s-like2 pull-right"></span></p>
+                                    </div>
+                                </div>
+                                <p class="margin-left-10 margin-right-10">Revenue</p>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-belize-hole" role="progressbar" data-transitiongoal="90"></div>
+                                </div>
+                                <a href="{{ route('kosakata.created') }}" class="padding-8 hvr-bounce-to-right bg-belize-hole" style="width:100%;">Read full report <i class="fa fa-arrow-circle-right"></i></a>
+                            </div><!--/widget-content--> 
+                        </div><!--/widget-->
+
+                    </div>
+
+                </div><!-- .row -->
+           
+
+
+                
+            </div><!--/all-projects-->
+
+
+        </div><!--/col-md-12-->
+
+        <!--End Left Sidebar-->
+
+     
+    </div>
 </div>
-
 @endsection

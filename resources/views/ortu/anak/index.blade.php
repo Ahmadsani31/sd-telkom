@@ -36,11 +36,10 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Cover Buku</th>
-                                <th>Nama Buku</th>
-                                <th>Halaman</th>
-                                <th>Paragraf Awal</th>
-                                <th>Paragraf Akhir</th>
+                                <th>User</th>
+                                <th>Sholat</th>
+                                <th>Waktu</th>
+
                                 <th>Tanggal</th>
                                 <th>Action</th>
                             </tr>
@@ -50,23 +49,18 @@
                                 @endphp
 
 
-                                @foreach ($data as $da)
+                                @foreach ($sholat as $lat)
 
 
                                 <tbody>
                                     <tr>
                                         <th scope="row">{{ $no++ }}</th>
-                                        <td>{{ $da->nama_buku}}</td>
+                                        <td rowspan="2">{{ $lat->user_id}}</td>
 
-                                        @foreach ($mengaji as $ngaji)
-                                        <td>{{ $ngaji->nama_surat }}</td>
-                                @endforeach
-                                @foreach ($sholat as $lat)
-                                <td>{{ $lat->sholat }}</td>
-                        @endforeach
-                                        <td>Paragraf [{{ $da->paragraf_awal }}]</td>
-                                        <td>Paragraf [{{ $da->paragraf_akhir }}]</td>
-                                        <td>{{ $da->created_at->format('D, d M y') }}</td>
+
+                                        <td>{{ $lat->sholat }}</td>
+                                        <td>{{ $lat->waktu_sholat }}</td>
+                                        <td>{{ $lat->created_at->format('D, d M y') }}</td>
                                         <td>
                                             <a href=""class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                         </td>

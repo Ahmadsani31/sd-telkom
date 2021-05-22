@@ -16,9 +16,10 @@ class CreateSholatsTable extends Migration
         Schema::create('sholats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->string('sholat');
+            $table->string('nama_sholat');
+            $table->string('jadwal_sholat');
             $table->string('waktu_sholat');
-            $table->text('image');
+            $table->text('vidio_sholat');
             $table->string('rating')->nullable();
             $table->timestamps();
         });

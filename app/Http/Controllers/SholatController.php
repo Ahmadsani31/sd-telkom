@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
+
 
 class SholatController extends Controller
 {
@@ -46,27 +48,38 @@ class SholatController extends Controller
 
     public function store(Request $request)
     {
-        // return response()->json($request);
 
-        // DB::transaction(function () {
+        // dd($request);
+        if ($request->hasFile('video')) {
 
-        // });
-        $image_parts = str_replace('data:image/jpeg;base64,','', $request->image);
-        $image_base64 = base64_decode($image_parts);
-        $fileName = 'sholat-'.date('YmdHis') . '.jpeg';
-        file_put_contents(public_path('images/sholat/').$fileName,$image_base64);
+            $file = $request->file('video');
+            $path = 'sholat/';
+            // $destinationPath = 'images/vidio/';
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = 'mp4';
 
-        $data = [
-            'user_id' => Auth::user()->id,
-            'sholat' => $request->sholat,
-            'waktu_sholat' => $request->waktu_sholat,
-            'image' => $fileName,
-            'rating' => $request->star
-        ];
-        $nilai =  Sholat::create($data);
-            Alert::success('Congratulations', 'Waktu Sholat Berhasil Diinput')->persistent(false)->autoClose(2000);
+            $fileNameToStore = preg_replace('/\s+/', '_', $filename . '_' . time() . '.' . $extension);
 
-        return response()->json($nilai);
+            Storage::disk('public')->putFileAs($path, $file, $fileNameToStore);
+            // $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // $file->move($destinationPath, $fileNameToStore);
+
+
+                $data = [
+                    'user_id' => Auth::user()->id,
+                    'nama_sholat' => $request->nama_sholat,
+                    'jadwal_sholat' => $request->waktu_sholat,
+                    'waktu_sholat' => Carbon::now()->format('H:i'),
+                    'vidio_sholat' => $fileNameToStore,
+                    'rating' => $request->rating
+                ];
+                $nilai =  Sholat::create($data);
+                    Alert::success('Congratulations', 'Waktu Sholat Berhasil Diinput')->persistent(false)->autoClose(3000);
+                    return response()->json($nilai);
+
+            // return  response()->json(['success' => ($media) ? 1 : 0, 'message' => ($media) ? 'Video uploaded successfully.' : "Some thing went wrong. Try again !."]);
+        }
     }
 
     public function dataSholat()

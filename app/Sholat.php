@@ -9,9 +9,10 @@ class Sholat extends Model
     protected $table = 'sholats';
 
     protected $fillable = ['user_id',
-                            'sholat',
+                            'nama_sholat',
+                            'jadwal_sholat',
                             'waktu_sholat',
                             'rating',
-                            'image',
+                            'vidio_sholat',
                         ];
 }

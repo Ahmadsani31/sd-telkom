@@ -54,7 +54,7 @@
                         <div class="c_content">
                             <form class="form-horizontal" id="formKosakata" name="formKosakata" enctype="multipart/form-data">
 
-
+<input type="hidden" name="nama" id="namaaja" value="2">
                                 <div class="form-group">
                                     <div class="col-sm-12" >
 
@@ -168,7 +168,9 @@
     let recorded = document.getElementById("recorded");
     let downloadLocalButton = document.getElementById("downloadLocalButton");
 
-    let recordingTimeMS = 10000; //video limit 5 sec
+    var catSub = $('#namaaja').val();
+console.log(catSub);
+    let recordingTimeMS = 2000; //video limit 5 sec
     var localstream;
 
     window.log = function (msg) {
@@ -240,6 +242,7 @@
                 formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
                 formData.append('video', recordedBlob);
 
+                formData.append('rating', catSub);
 
                 // downloadLocalButton.href = recording.src;
                 // downloadLocalButton.download = "RecordedVideo.webm";

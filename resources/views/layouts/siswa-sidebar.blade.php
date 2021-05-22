@@ -20,7 +20,7 @@
                             </div>
 
                         </li>
-                        <li class='{{ route('siswa.home') }}'><a href="#" class="hvr-bounce-to-right-sidebar-parent active"><span class='icon-sidebar icon-home fa-2x'></span><span>Profile</span></a></li>
+                        <li class='{{ route('siswa.home') }}'><a href="{{ route('siswa.home') }}" class="hvr-bounce-to-right-sidebar-parent active"><span class='icon-sidebar icon-home fa-2x'></span><span>Profile</span></a></li>
 
                         <li><a href="{{ route('sholat.index') }}" class="hvr-bounce-to-right-sidebar-parent">
                             <span class='icon-sidebar pe-7s-portfolio fa-2x'></span>

@@ -20,7 +20,7 @@ class CreateLiterasisTable extends Migration
             $table->string('halaman');
             $table->string('paragraf_awal');
             $table->string('paragraf_akhir');
-            $table->text('cover_buku');
+            $table->text('vidio');
             $table->timestamps();
         });
     }

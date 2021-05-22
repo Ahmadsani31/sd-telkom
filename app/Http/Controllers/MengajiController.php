@@ -6,6 +6,8 @@ use App\Mengaji;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MengajiController extends Controller
 {
@@ -31,23 +33,38 @@ class MengajiController extends Controller
     {
         $ayat = Http::get('https://api.banghasan.com/quran/format/json/surat/'.$request->surat)->json()['hasil'];
         $nama = $ayat[0]['nama'];
+// dd($request->hasFile('video'));
 
-        $image_parts = str_replace('data:image/jpeg;base64,','', $request->image);
-        $image_base64 = base64_decode($image_parts);
-        $fileName = 'mengaji-'.date('YmdHis') . '.jpeg';
-        file_put_contents(public_path('images/mengaji/').$fileName,$image_base64);
+        if ($request->hasFile('video')) {
 
-        $data = [
-            'user_id' => Auth::user()->id,
-            'surat' => $request->surat,
-            'nama_surat' => $nama,
-            'ayat_awal' => $request->ayat1,
-            'ayat_akhir' => $request->ayat2,
-            'image' => $fileName,
-        ];
-        Mengaji::create($data);
+            $file = $request->file('video');
+            $path = 'mengaji/';
+            // $destinationPath = 'images/vidio/';
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = 'mp4';
 
-        return response()->json($data);
+            $fileNameToStore = preg_replace('/\s+/', '_', $filename . '_' . time() . '.' . $extension);
+
+            Storage::disk('public')->putFileAs($path, $file, $fileNameToStore);
+            // $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // $file->move($destinationPath, $fileNameToStore);
+
+
+            $data = [
+                'user_id' => Auth::user()->id,
+                'surat' => $request->surat,
+                'nama_surat' => $nama,
+                'ayat_awal' => $request->ayat1,
+                'ayat_akhir' => $request->ayat2,
+                'vidio_ngaji' => $fileNameToStore,
+            ];
+                $nilai =  Mengaji::create($data);
+                    Alert::success('Congratulations', 'Data Mengaji Berhasil Diinput')->persistent(false)->autoClose(3000);
+                    return response()->json($nilai);
+
+            // return  response()->json(['success' => ($media) ? 1 : 0, 'message' => ($media) ? 'Video uploaded successfully.' : "Some thing went wrong. Try again !."]);
+        }
     }
 
     public function created()
