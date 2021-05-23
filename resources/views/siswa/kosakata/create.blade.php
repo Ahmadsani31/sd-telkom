@@ -52,61 +52,62 @@
                             <div class="clearfix"></div>
                         </div><!--/.c_title-->
                         <div class="c_content">
-                            <form class="form-horizontal" id="formKosakata" name="formKosakata" enctype="multipart/form-data">
-                                <div class="form-group ">
-                                    <label class="col-sm-2 control-label">Bahasa</label>
-                                    <div class="col-sm-10">
-                                <select class="select2" id="bahasa" name="bahasa">
-                                    <option selected>--Pilih Bahasa--</option>
-                                    <optgroup label="Pilih Bahasa">
-                                        <option value="indonesia">Bahasa Indonesia</option>
-                                        <option value="inggris">Bahasa Inggris</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Kosa kata</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="vacabularies" id="inputag-1" placeholder="Enter untuk menginput kosa kata">
+                            <form action="{{ route('kosakata.store') }}" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="modal" id="modalRating1" data-easein="bounceInDown" data-easeout="bounceOutDown" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+                                    <div class="modal-dialog modal-full">
+                                      <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="card">
+                                                        <div class="rating">
+                                                            <input type="radio" name="star" class="nana" id="star1" data-id="3" value="3">
+                                                                <label for="star1">
+                                                                    <img src="{{ asset('rating-emoji/senang.gif') }}" class="img-responsive">
+                                                                    <h4 class="text-emoji">Senang</h4>
+                                                                </label>
+                                                            <input type="radio" name="star" class="nana" id="star2" data-id="2" value="2" checked>
+                                                                <label for="star2">
+                                                                    <img src="{{ asset('rating-emoji/marah.gif') }}" class="img-responsive">
+                                                                    <h4 class="text-emoji">Marah</h4>
+                                                                </label>
+                                                            <input type="radio" name="star" class="nana" id="star3" data-id="1" value="1">
+                                                                <label for="star3">
+                                                                    <img src="{{ asset('rating-emoji/sedih.gif') }}" class="img-responsive">
+                                                                    <h4 class="text-emoji">Sedih</h4>
+                                                                </label>
+                                                                <h3 class="text">What Are You Feeling Kids</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                      </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Image Buku</label>
-                                    <div class="col-sm-10" >
-                                        <div class="hover-ideas" id="exampleImage">
-
-                                            <div class="d-flex justify-content-center" style="padding-left: 20%">
-                                                <a href="javascript:void(0);" id="takeImage" title="Image 1">
-                                                        <img class="" width="70%" src="{{ asset('assets/images/users/img5-md.jpg') }}" alt="image"/>
-                                                </a>
+                                  </div>
+                                <div class="row">
+                                    <div class="col-sm-6 has-success">
+                                        <div class="form-group ">
+                                            <label for="cname" class="control-label col-sm-4">Kata-Kata</label>
+                                            <div class="col-sm-8">
+                                                <input class=" form-control input-lg" name="bahasa" id="bahasa" type="text" required placeholder="Bahasa"/>
                                             </div>
                                         </div>
-                                        <div class="center">
-                                        <div id="my_photo_booth" class="main-section" style="display: none">
-                                                <div id="my_camera"></div>
-                                                <div id="pre_take_buttons">
-                                                    <!-- This button is shown before the user takes a snapshot -->
-                                                    <div class="pager wizard text-center">
-                                                        <button type="button" id="preview_snapshot" class="btn btn-primary text-center">Take Snapshot</button>
-                                                    </div>
-                                                </div>
-                                                <div id="post_take_buttons" style="display:none">
-                                                    <!-- These buttons are shown after a snapshot is taken -->
-                                                    <div class="pager wizard">
-                                                        <button type="button" id="cancel_preview" class="btn btn-default">Take Another</button>
-                                                        <button type="button" id="save_photo" class="btn btn-success">Save Image</button>
-                                                    </div>
-                                                    <input type="hidden" name="image" class="image-tag">
-                                                </div>
-                                        </div>
                                     </div>
-                                        <div class="text-center">
-                                            <div id="results"  style="display:none"></div>
+                                    <div class="col-sm-6 has-success">
+                                        <div class="form-group ">
+                                            <label for="cname" class="control-label col-sm-2">Arti Kata</label>
+                                            <div class="col-sm-10">
+                                                <input class=" form-control input-lg" name="arti" id="arti" type="text" required placeholder="Terjemahan"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="submit" id="btnSaveMengaji" class="btn btn-success ladda-button" data-style="expand-left">Simpan Data</button>
@@ -120,7 +121,54 @@
                 </div><!--/col-md-12-->
 
             </div><!--/row-->
+            <div class="row">
 
+                <div class="col-md-6">
+
+                    <div class="c_panel">
+
+                        <div class="c_title">
+                            <h2>Kata Kata Yang Sudah Tersimpan</h2>
+
+                            <div class="clearfix"></div>
+                        </div><!--/.c_title-->
+
+                        <div class="c_content">
+
+                            <table class="table  table-hover general-table">
+                                <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Bahasa</th>
+                                    <th>Terjemahan</th>
+
+                                </tr>
+                                </thead>
+                                @php
+                                    $no = 1;
+                                @endphp
+                                @foreach ($data as $item)
+
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $item->bahasa }}</td>
+                                        <td><b>{{ $item->arti }}</b></td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+
+                            </table>
+
+
+                        </div><!--/.c_content-->
+
+                    </div><!--/.c_panels-->
+
+
+                </div><!--/col-md-12-->
+
+            </div><!--/row-->
         </div><!--/col-md-6-->
 
     </div><!--/row-->
@@ -141,92 +189,24 @@
         });
 
 
-        $('#takeImage').click(function () {
-        $('#takeShot').val("Capture Image");
-        $('#my_photo_booth').show();
-        $('#exampleImage').hide();
+        $(window).on('load',function(){
+        var delayMs = 500; // delay in milliseconds
 
-		Webcam.set({
-            width: 320,
-            height: 240,
-            dest_width: 640,
-            dest_height: 480,
-            image_format: 'jpeg',
-            jpeg_quality: 90,
-            force_flash: false,
-            flip_horiz: true,
-            fps: 45
-		});
-        Webcam.attach( '#my_camera' );
+        setTimeout(function(){
+        $('#modalRating1').modal('show');
 
-        var shutter = new Audio();
-            shutter.autoplay = false;
-            shutter.src = "{{ asset('sound/shutter.mp3') }}" || "{{ asset('sound/shutter.ogg') }}";
+        }, delayMs);
+    });
 
-        $('#preview_snapshot').click(function () {
-            try { shutter.currentTime = 0; } catch(e) {;} // fails in IE
-                shutter.play();
-                // freeze camera so user can preview current frame
-                Webcam.freeze();
+    $('body').on('click', '.nana', function () {
+        setTimeout(function(){
+            $('#modalRating1').modal('hide');
+        }, 1000);
+        var rat = $(this).data("id");
+        console.log(rat)
+        $('#rating').val(rat);
 
-                // swap button sets
-                document.getElementById('pre_take_buttons').style.display = 'none';
-                document.getElementById('post_take_buttons').style.display = '';
-        });
-
-        $('#cancel_preview').click(function () {
-
-                // cancel preview freeze and return to live camera view
-                Webcam.unfreeze();
-
-                // swap buttons back to first set
-                document.getElementById('pre_take_buttons').style.display = '';
-                document.getElementById('post_take_buttons').style.display = 'none';
-        });
-
-        $('#save_photo').click(function () {
-
-                // actually snap photo (from preview freeze) and display it
-                Webcam.snap( function(data_uri) {
-                    // display results in page
-                    console.log(data_uri);
-                    $(".image-tag").val(data_uri);
-                    document.getElementById('results').innerHTML =
-                        '<img class="img-responsive mx-auto d-block" src="'+data_uri+'"/><br/></br>';
-
-                    // shut down camera, stop capturing
-                    Webcam.reset();
-
-                    // show results, hide photo booth
-                    document.getElementById('results').style.display = '';
-                    document.getElementById('my_photo_booth').style.display = 'none';
-                } );
-
-        });
-        });
-
-
-    if ($("#formKosakata").length > 0) {
-        $("#formKosakata").validate({
-            submitHandler: function (form) {
-                $.ajax({
-                    data: $('#formKosakata').serialize(),
-                    url: "{{ route('kosakata.store') }}",
-                    type: "POST",
-                    dataType: 'json',
-                    success: function (data) {
-                        window.location.href = "{{ route('kosakata.index') }}";
-                    },
-                    error: function (data) {
-                        console.log('Error:', data.responseJSON.info);
-                    }
-                });
-            }
-        });
-    }
-
-
-
+    });
     </script>
 
 

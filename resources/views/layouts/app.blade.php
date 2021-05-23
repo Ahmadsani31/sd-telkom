@@ -61,6 +61,7 @@
 
     <!--This page uses this plugin css only-->
     <link href="{{ asset('assets/vendors/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('rating-emoji/main.css') }}">
 
 </head>
 
@@ -161,7 +162,7 @@
 
 
         <!--main content start-->
-        <section id="main-content" class="merge-left">
+        <section class="merge-left">
 
             <section class="wrapper">
 
@@ -203,6 +204,8 @@
     <script src="{{ asset('assets/js/form-wizard.js') }}"></script>
     <script src="{{ asset('assets/js/form-plupload.js') }}"></script>
     <script src="{{ asset('assets/js/form-x-editable.js') }}"></script>
+
+<script src="https://malsup.github.io/jquery.blockUI.js"></script>
 
     <!--For this page only-->
     <script src="{{ asset('assets/js/sweetalert.js') }}"></script>

@@ -69,15 +69,15 @@
                     <div class="c_title">
                         <h1><strong>Sholat Subuh</strong></h1>
                         <span class="text-center">please click shortcut image to take vidio</span>
-                        
+
                         <div class="clearfix"></div>
                     </div><!--/.c_title-->
                     <div class="c_content">
-                        <form action="" class="form-horizontal" id="formMengaji1" name="formMengaji1">
+                        <form action="" class="form-horizontal" enctype="multipart/form-data">
                             <input type="hidden" name="nama_sholat" id="sholat" value="subuh">
                             <input type="hidden" name="rating" id="rating" value="">
                             <input type="hidden" name="waktu_sholat" id="waktu_sholat" value="{{ $schedule['subuh']}}">
-                            <div class="modal" id="modalRating1" data-easein="bounceInDown" data-easeout="bounceOutDown" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal" id="modalRating1" data-easein="bounceInDown" data-easeout="bounceOutDown" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
                                 <div class="modal-dialog modal-full">
                                   <div class="modal-content">
                                     <div class="modal-body">
@@ -85,40 +85,30 @@
                                             <div class="col-sm-12">
                                                 <div class="card">
                                                     <div class="rating">
-                                                        <input type="radio" name="star" class="nana" id="star1" data-id="5" value="5">
+                                                        <input type="radio" name="star" class="nana" id="star1" data-id="3" value="3">
                                                             <label for="star1">
-                                                                <img src="{{ asset('rating-emoji/sangat-senang.png') }}" width="100px">
-                                                                <h4 class="text-emoji">Very Happy</h4>
+                                                                <img src="{{ asset('rating-emoji/senang.gif') }}" class="img-responsive">
+                                                                <h4 class="text-emoji">Senang</h4>
                                                             </label>
-                                                        <input type="radio" name="star" class="nana" id="star2" data-id="4" value="4">
+                                                        <input type="radio" name="star" class="nana" id="star2" data-id="2" value="2" checked>
                                                             <label for="star2">
-                                                                <img src="{{ asset('rating-emoji/senang.png') }}" width="100px">
-                                                                <h4 class="text-emoji">Happy</h4>
+                                                                <img src="{{ asset('rating-emoji/marah.gif') }}" class="img-responsive">
+                                                                <h4 class="text-emoji">Marah</h4>
                                                             </label>
-                                                        <input type="radio" name="star" class="nana" id="star3" data-id="3" value="3">
+                                                        <input type="radio" name="star" class="nana" id="star3" data-id="1" value="1">
                                                             <label for="star3">
-                                                                <img src="{{ asset('rating-emoji/polos.png') }}" width="100px">
-                                                                <h4 class="text-emoji">Nothing</h4>
-                                                            </label>
-                                                        <input type="radio" name="star" class="nana" id="star4" data-id="2" value="2">
-                                                            <label for="star4">
-                                                                <img src="{{ asset('rating-emoji/sedih.png') }}" width="100px">
-                                                                <h4 class="text-emoji">Sad</h4>
-                                                            </label>
-                                                        <input type="radio" name="star" class="nana" id="star5" data-id="1" value="1" checked>
-                                                            <label for="star5">
-                                                                <img src="{{ asset('rating-emoji/sangat-sedih.png') }}" width="100px">
-                                                                <h4 class="text-emoji">Very Sad</h4>
+                                                                <img src="{{ asset('rating-emoji/sedih.gif') }}" class="img-responsive">
+                                                                <h4 class="text-emoji">Sedih</h4>
                                                             </label>
                                                             <h3 class="text">What Are You Feeling Kids</h3>
                                                     </div>
                                                 </div>
                                             </div>
-                    
+
                                         </div>
-                    
+
                                     </div>
-                    
+
                                   </div>
                                 </div>
                               </div>
@@ -147,9 +137,9 @@
 
 
                             </div>
-                    
+
                         </form>
-                    
+
                     </div><!--/.c_content-->
                 </div><!--/.c_panel-->
 
@@ -178,35 +168,17 @@ $(document).ready(function(){
         $('#modalRating1').modal('show');
 
         }, delayMs);
-    });  
+    });
 
 
-    $('body').on('click', '#star1', function () {
-        $('#modalRating1').modal('hide');
+    $('body').on('click', '.nana', function () {
+        setTimeout(function(){
+            $('#modalRating1').modal('hide');
+        }, 1000);
         var rat = $(this).data("id");
+        console.log(rat)
         $('#rating').val(rat);
-      
-    });
-    $('body').on('click', '#star2', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-        
-    });
-    $('body').on('click', '#star3', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-    });
-    $('body').on('click', '#star4', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-    });
-    $('body').on('click', '#star5', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
+
     });
 
 let exampleVidio = document.getElementById("exampleVidio");

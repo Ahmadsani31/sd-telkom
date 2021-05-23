@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use File;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LiterasiController extends Controller
 {
@@ -24,22 +26,35 @@ class LiterasiController extends Controller
     public function store(Request $request)
     {
 
-        $image_parts = str_replace('data:image/jpeg;base64,','', $request->image);
-        $image_base64 = base64_decode($image_parts);
-        $fileName = 'literasi-'.date('YmdHis') . '.jpeg';
-        file_put_contents(public_path('images/literasi/').$fileName,$image_base64);
+        if ($request->hasFile('video')) {
 
-        $data = [
-            'user_id' => Auth::user()->id,
-            'nama_buku' => Str::title($request->nama),
-            'halaman' => $request->halaman,
-            'paragraf_awal' => $request->p_awal,
-            'paragraf_akhir' => $request->p_akhir,
-            'cover_buku' => $fileName,
-        ];
-       $success =  Literasi::create($data);
+            $file = $request->file('video');
+            $path = 'literasi/';
+            // $destinationPath = 'images/vidio/';
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = 'mp4';
 
-        return response()->json($success);
+            $fileNameToStore = preg_replace('/\s+/', '_', $filename . '_' . time() . '.' . $extension);
+
+            Storage::disk('public')->putFileAs($path, $file, $fileNameToStore);
+            // $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // $file->move($destinationPath, $fileNameToStore);
+
+
+
+            $data = [
+                'user_id' => Auth::user()->id,
+                'nama_buku' => Str::title($request->nama_buku),
+                'halaman' => $request->halaman,
+                'paragraf_awal' => $request->p_awal,
+                'paragraf_akhir' => $request->p_akhir,
+                'vidio' => $fileNameToStore,
+            ];
+                $nilai =  Literasi::create($data);
+                    Alert::success('Congratulations', 'Data Literasi Berhasil Diinput')->persistent(false)->autoClose(3000);
+                    return response()->json($nilai);
+        }
     }
 
     public function destroy($id)

@@ -22,22 +22,29 @@ class SiswaController extends Controller
         $schedule= Http::get('https://api.myquran.com/v1/sholat/jadwal/0314/'.$year.'/'.$month.'/'.$day.'')->json()['data']['jadwal'];
 
         $sholat = Sholat::where('user_id',Auth::user()->id)->latest()->first();
-        $sho = Sholat::where('user_id',Auth::user()->id)->whereIn('nama_sholat',['subuh'])->latest('id')->first();
 
-        $waktu = $sho->created_at->format('Y-m-d');
-// dd($waktu);
+        $subuh = Sholat::where('user_id',Auth::user()->id)->whereIn('nama_sholat',['subuh'])->latest('id')->first();
+        $dzuhur = Sholat::where('user_id',Auth::user()->id)->whereIn('nama_sholat',['dzuhur'])->latest('id')->first();
+        $ashar = Sholat::where('user_id',Auth::user()->id)->whereIn('nama_sholat',['ashar'])->latest('id')->first();
+        $maghrib = Sholat::where('user_id',Auth::user()->id)->whereIn('nama_sholat',['maghrib'])->latest('id')->first();
+        $isya = Sholat::where('user_id',Auth::user()->id)->whereIn('nama_sholat',['isya'])->latest('id')->first();
+
+        $waktu_subuh = $subuh->created_at->format('Y-m-d');
+        $waktu_dzuhur = $dzuhur->created_at->format('Y-m-d');
+        $waktu_ashar = $ashar->created_at->format('Y-m-d');
+        $waktu_maghrib = $maghrib->created_at->format('Y-m-d');
+        $waktu_isya = $isya->created_at->format('Y-m-d');
+
         $waktu_sekarang = Carbon::now()->format('Y-m-d');
 
         // $s = DB::table('sholats')->where('user_id',Auth::user()->id)->whereIn('created_at', Carbon->now)
         // dd($sholat->nama_sholat);
-        if ($waktu == $waktu_sekarang ) {
+        if ($waktu_subuh == $waktu_sekarang ) {
             $nilai = 100;
-            $nama = 'terlaksana';
         }else{
-            $nilai = 0;
-            $nama = 'belum-terlaksana';
+            $nilai = 20;
 
         }
-        return view('siswa.home', compact('nilai','nama','schedule'));
+        return view('siswa.home', compact('nilai','schedule','subuh','dzuhur','ashar','maghrib','isya'));
     }
 }

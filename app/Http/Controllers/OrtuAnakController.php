@@ -17,9 +17,9 @@ class OrtuAnakController extends Controller
     {
        $siswa_id = BioOrtu::where('user_id',Auth::user()->id)->first(['siswa_id']);
 // dd($siswa_id->siswa_id);
-        $data = Literasi::where('user_id',$siswa_id->siswa_id)->get();
+        $data = Literasi::where('user_id',$siswa_id->siswa_id)->paginate(5);
         $mengaji = Mengaji::where('user_id',$siswa_id->siswa_id)->get();
-        $sholat = Sholat::where('user_id',$siswa_id->siswa_id)->get();
+        $sholat = Sholat::where('user_id',$siswa_id->siswa_id)->simplePaginate(5);
 
         // $sholat = collect(
         //     ['sholat' => 'subuh'],

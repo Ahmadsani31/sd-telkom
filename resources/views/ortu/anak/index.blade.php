@@ -71,7 +71,7 @@
 
 
                         </table>
-
+                        {{ $sholat->links() }}
 
                     </div><!--/.c_content-->
 

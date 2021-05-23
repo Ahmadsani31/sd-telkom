@@ -10,7 +10,6 @@ class Kosakata extends Model
 
     protected $fillable = ['user_id',
                             'bahasa',
-                            'kosakata',
-                            'image',
+                            'arti',
                         ];
 }

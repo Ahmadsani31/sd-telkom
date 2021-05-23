@@ -6,7 +6,7 @@ use App\Kosakata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KosakataController extends Controller
 {
@@ -19,26 +19,22 @@ class KosakataController extends Controller
     }
     public function created()
     {
-        return view('siswa.kosakata.create');
+        $data = Kosakata::where('user_id',Auth::user()->id)->get();
+
+        return view('siswa.kosakata.create',compact('data'));
     }
 
     public function store(Request $request)
     {
-
-        $image_parts = str_replace('data:image/jpeg;base64,','', $request->image);
-        $image_base64 = base64_decode($image_parts);
-        $fileName = 'kosakata-'.date('YmdHis') . '.jpeg';
-        file_put_contents(public_path('images/kosakata/').$fileName,$image_base64);
-
         $data = [
             'user_id' => Auth::user()->id,
             'bahasa' => Str::title($request->bahasa),
-            'kosakata' => $request->vacabularies,
-            'image' => $fileName,
+            'arti' => $request->arti,
         ];
-       $success =  Kosakata::create($data);
+       Kosakata::create($data);
+       Alert::success('Congratulations', 'Data Literasi Berhasil Diinput')->persistent(false)->autoClose(3000);
 
-        return response()->json($success);
+        return redirect()->back();
     }
 
     public function destroy($id)

@@ -91,11 +91,11 @@ class SholatController extends Controller
         $month = Carbon::now()->format('m');
 
         $schedule= Http::get('https://api.myquran.com/v1/sholat/jadwal/0314/'.$year.'/'.$month.'/'.$day.'')->json()['data']['jadwal'];
-       $data_subuh =  Sholat::where('sholat','subuh')->exists();
-       $data_subuh =  Sholat::where('sholat','dzuhur')->exists();
-       $data_subuh =  Sholat::where('sholat','ashar')->exists();
-       $data_subuh =  Sholat::where('sholat','maghrib')->exists();
-       $data_subuh =  Sholat::where('sholat','isya')->exists();
+       $data_subuh =  Sholat::where('nama_sholat','subuh')->exists();
+       $data_subuh =  Sholat::where('nama_sholat','dzuhur')->exists();
+       $data_subuh =  Sholat::where('nama_sholat','ashar')->exists();
+       $data_subuh =  Sholat::where('nama_sholat','maghrib')->exists();
+       $data_subuh =  Sholat::where('nama_sholat','isya')->exists();
         $data =[
             'subuh'=> $schedule['subuh'],
             'dzuhur'=> $schedule['dzuhur'],

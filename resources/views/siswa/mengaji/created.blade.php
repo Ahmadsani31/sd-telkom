@@ -65,7 +65,7 @@
                                 <input type="hidden" name="rating" id="surat1" value="">
                                 <input type="hidden" name="rating" id="ayat11" value="">
                                 <input type="hidden" name="rating" id="ayat22" value="">
-                                <div class="modal" id="modalRating1" data-easein="bounceInDown" data-easeout="bounceOutDown" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal" id="modalRating1" data-easein="bounceInDown" data-easeout="bounceOutDown" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
                                     <div class="modal-dialog modal-full">
                                       <div class="modal-content">
                                         <div class="modal-body">
@@ -73,47 +73,37 @@
                                                 <div class="col-sm-12">
                                                     <div class="card">
                                                         <div class="rating">
-                                                            <input type="radio" name="star" class="nana" id="star1" data-id="5" value="5">
+                                                            <input type="radio" name="star" class="nana" id="star1" data-id="3" value="3">
                                                                 <label for="star1">
-                                                                    <img src="{{ asset('rating-emoji/sangat-senang.png') }}" width="100px">
-                                                                    <h4 class="text-emoji">Very Happy</h4>
+                                                                    <img src="{{ asset('rating-emoji/senang.gif') }}" class="img-responsive">
+                                                                    <h4 class="text-emoji">Senang</h4>
                                                                 </label>
-                                                            <input type="radio" name="star" class="nana" id="star2" data-id="4" value="4">
+                                                            <input type="radio" name="star" class="nana" id="star2" data-id="2" value="2" checked>
                                                                 <label for="star2">
-                                                                    <img src="{{ asset('rating-emoji/senang.png') }}" width="100px">
-                                                                    <h4 class="text-emoji">Happy</h4>
+                                                                    <img src="{{ asset('rating-emoji/marah.gif') }}" class="img-responsive">
+                                                                    <h4 class="text-emoji">Marah</h4>
                                                                 </label>
-                                                            <input type="radio" name="star" class="nana" id="star3" data-id="3" value="3">
+                                                            <input type="radio" name="star" class="nana" id="star3" data-id="1" value="1">
                                                                 <label for="star3">
-                                                                    <img src="{{ asset('rating-emoji/polos.png') }}" width="100px">
-                                                                    <h4 class="text-emoji">Nothing</h4>
-                                                                </label>
-                                                            <input type="radio" name="star" class="nana" id="star4" data-id="2" value="2">
-                                                                <label for="star4">
-                                                                    <img src="{{ asset('rating-emoji/sedih.png') }}" width="100px">
-                                                                    <h4 class="text-emoji">Sad</h4>
-                                                                </label>
-                                                            <input type="radio" name="star" class="nana" id="star5" data-id="1" value="1" checked>
-                                                                <label for="star5">
-                                                                    <img src="{{ asset('rating-emoji/sangat-sedih.png') }}" width="100px">
-                                                                    <h4 class="text-emoji">Very Sad</h4>
+                                                                    <img src="{{ asset('rating-emoji/sedih.gif') }}" class="img-responsive">
+                                                                    <h4 class="text-emoji">Sedih</h4>
                                                                 </label>
                                                                 <h3 class="text">What Are You Feeling Kids</h3>
                                                         </div>
                                                     </div>
                                                 </div>
-                        
+
                                             </div>
-                        
+
                                         </div>
-                        
+
                                       </div>
                                     </div>
                                   </div>
-                                <div class="form-group">
+                                <div class="form-group has-success">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Surat</label>
                                     <div class="col-sm-10">
-                                        <select class="select2" id="surat" name="surat" required>
+                                        <select class="select2 input-lg" id="surat" name="surat" required>
                                             <option selected>--Pilih Surat--</option>
                                             <optgroup label="Surat Alquran">
                                                 @foreach ($surat as $surah)
@@ -123,10 +113,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                        <div class="form-group">
+                                        <div class="form-group has-success">
                                             <label class="col-sm-2 control-label">Bacaan Ayat</label>
                                                 <div class="col-sm-4">
-                                            <select class="select2" id="ayat1" name="ayat1" required>
+                                            <select class="select2 input-lg" id="ayat1" name="ayat1" required>
                                                 <option selected>--Ayat Pertama--</option>
                                                 <optgroup label="Pilih Ayat">
                                                     <option selected>--Ayat Pertama--</option>
@@ -136,7 +126,7 @@
                                         </div>
                                         <label class="col-sm-2 control-label">Sampai Dengan</label>
                                         <div class="col-sm-4">
-                                            <select class="select2" id="ayat2" name="ayat2" required>
+                                            <select class="select2 input-lg" id="ayat2" name="ayat2" required>
                                                 <option selected>--Ayat Akhir--</option>
                                                 <optgroup label="Pilih Ayat">
 
@@ -150,7 +140,7 @@
                                     <div class="col-sm-10" >
                                         <div class="form-group">
                                             <div class="col-sm-12" >
-            
+
                                                         <div class="hover-ideas" id="exampleVidio">
                                                             <div class="d-flex justify-content-center" style="padding-left: 20%">
                                                                 <a href="javascript:void(0);" id="startButton" title="Image 1">
@@ -170,12 +160,12 @@
                                                         <a id="startButtonAgain" class="btn btn-success">Star Again</a>
                                                     </div>
                                                     </div>
-            
-            
+
+
                                         </div>
                                     </div>
                                 </div>
-                            
+
                             </form>
 
                         </div><!--/.c_content-->
@@ -211,35 +201,18 @@
         $('#modalRating1').modal('show');
 
         }, delayMs);
-    });  
+    });
 
-    $('body').on('click', '#star1', function () {
-        $('#modalRating1').modal('hide');
+    $('body').on('click', '.nana', function () {
+        setTimeout(function(){
+            $('#modalRating1').modal('hide');
+        }, 1000);
         var rat = $(this).data("id");
+        console.log(rat)
         $('#rating').val(rat);
-      
+
     });
-    $('body').on('click', '#star2', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-        
-    });
-    $('body').on('click', '#star3', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-    });
-    $('body').on('click', '#star4', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-    });
-    $('body').on('click', '#star5', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-    });
+
 
         let exampleVidio = document.getElementById("exampleVidio");
 let div_vidio = document.getElementById("div_vidio");
@@ -379,14 +352,18 @@ if (startButtonAgain) {
             type: "video/webm"
             });
             recording.src = URL.createObjectURL(recordedBlob);
-
             var rating = $('#rating').val();
+            var surat = $('#surat1').val();
+            var ayat1 = $('#ayat11').val();
+            var ayat2 = $('#ayat22').val();
+
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
             formData.append('video', recordedBlob);
 
             formData.append('rating', rating);
-            formData.append('nama_sholat', nama_sholat);
-            formData.append('waktu_sholat', waktu_sholat);
+            formData.append('surat', surat);
+            formData.append('ayat1', ayat1);
+            formData.append('ayat2', ayat2);
 
 
             // downloadLocalButton.href = recording.src;
@@ -454,7 +431,7 @@ if (stopButton) {
 
                             for (var i = 1; i <= data[0].ayat; i++) {
                                 $("#ayat1").append( '<option value="'+i+'">Ayat ['+i+']</option>' );
-                                
+
                             }
 
                         });

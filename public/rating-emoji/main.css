@@ -1,11 +1,11 @@
 .card{
+    width: 100%;
     display: flex;
-    padding: 0;
-    margin: 0;
+    margin: 0 auto;
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    min-height: 50vh;
+    min-height: 60vh;
     background:burlywood;
 }
 .rating{
@@ -38,9 +38,10 @@
 }
 .rating label h4{
     color:black;
-    font-size: 24px;
+    font-size: 26px;
+    padding-left: 20px;
     padding-top: 10px;
-    font-weight: 500;
+    font-weight: 700;
     white-space: nowrap;
     opacity: 0;
     transform: translateY(-50px) scale(0);

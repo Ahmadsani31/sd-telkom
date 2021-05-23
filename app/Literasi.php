@@ -13,6 +13,6 @@ class Literasi extends Model
                             'halaman',
                             'paragraf_awal',
                             'paragraf_akhir',
-                            'cover_buku',
+                            'vidio',
                         ];
 }
