@@ -12,7 +12,14 @@ class Sholat extends Model
                             'nama_sholat',
                             'jadwal_sholat',
                             'waktu_sholat',
-                            'rating',
                             'vidio_sholat',
+                            'emotion',
+                            'status',
                         ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
 }

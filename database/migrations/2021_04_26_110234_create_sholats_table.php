@@ -20,7 +20,8 @@ class CreateSholatsTable extends Migration
             $table->string('jadwal_sholat');
             $table->string('waktu_sholat');
             $table->text('vidio_sholat');
-            $table->string('rating')->nullable();
+            $table->string('emotion')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

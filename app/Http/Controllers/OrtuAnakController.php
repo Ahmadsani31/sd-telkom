@@ -13,34 +13,71 @@ use Illuminate\Support\Facades\DB;
 
 class OrtuAnakController extends Controller
 {
+
+    function id_siswa(){
+        $siswa_id = BioOrtu::where('user_id',Auth::user()->id)->first(['siswa_id']);
+        return $siswa_id->siswa_id;
+
+    }
+
     public function index()
     {
+
+        return view('ortu.anak.index');
+    }
+
+    public function sholat()
+    {
+       $siswa_id = BioOrtu::where('user_id',Auth::user()->id)->first();
+
+       $sholat = Sholat::where('user_id',$siswa_id->siswa_id)
+       ->where('status','=',0)
+       ->whereDate('created_at','=',date('Y-m-d'))
+       ->orderBy('id', 'desc')
+       ->get();
+
+
+        return view('ortu.anak.sholat', compact('sholat'));
+    }
+
+    public function mengaji()
+    {
+       $siswa_id = BioOrtu::where('user_id',Auth::user()->id)->first();
+
+       $mengaji = Mengaji::where('user_id',$siswa_id->siswa_id)
+       ->where('status','=',0)
+       ->whereDate('created_at','=',date('Y-m-d'))
+       ->orderBy('id', 'desc')
+       ->get();
+
+
+       return view('ortu.anak.mengaji', compact('mengaji'));
+    }
+
+    public function literasi()
+    {
        $siswa_id = BioOrtu::where('user_id',Auth::user()->id)->first(['siswa_id']);
-// dd($siswa_id->siswa_id);
-        $data = Literasi::where('user_id',$siswa_id->siswa_id)->paginate(5);
-        $mengaji = Mengaji::where('user_id',$siswa_id->siswa_id)->get();
-        $sholat = Sholat::where('user_id',$siswa_id->siswa_id)->simplePaginate(5);
 
-        // $sholat = collect(
-        //     ['sholat' => 'subuh'],
-        //     ['sholat' => 'dzuhur'],
-        //     ['sholat' => 'ashar'],
-        //     ['sholat' => 'maghrib'],
-        //     ['sholat' => 'isya'],
-        // );
-        // $grouped = $sholat->groupBy('sholat');
+       $literasi = Literasi::where('user_id',$siswa_id->siswa_id)
+       ->where('status','=',0)
+       ->whereDate('created_at','=',date('Y-m-d'))
+       ->orderBy('id', 'desc')
+       ->get();
 
-        // $grouped->all();
-        // $users = DB::table('sholat')
-        // ->select(DB::raw('count(*) as user_count, level'))
-        // ->where('level', '<>', 1)
-        // ->groupBy('level')
-        // ->get();
+        return view('ortu.anak.literasi', compact('literasi'));
+    }
 
-        // $users = DB::table('sholats')
-        // ->groupBy('created_at')
-        // ->get();
-        // dd($grouped);
-        return view('ortu.anak.index', compact('data','mengaji','sholat'));
+    public function kosaKata()
+    {
+       $siswa_id = BioOrtu::where('user_id',Auth::user()->id)->first(['siswa_id']);
+       $kosakata = DB::table('kosakatas')
+       ->join('users', 'kosakatas.user_id', '=', 'users.id')
+       ->where('user_id',$siswa_id->siswa_id)
+       ->where('status','=',0)
+       ->whereDate('kosakatas.created_at','=',date('Y-m-d'))
+       ->orderBy('kosakatas.id', 'desc')
+       ->get();
+
+        return view('ortu.anak.kosakata', compact('kosakata'));
     }
 }

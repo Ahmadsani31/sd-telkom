@@ -16,9 +16,11 @@ class CreateKosakatasTable extends Migration
         Schema::create('kosakatas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->string('bahasa');
-            $table->string('arti');
-            $table->text('vidio');
+            $table->string('bahasa')->unique();
+            $table->string('arti')->unique();
+            $table->text('vidio')->nullable();
+            $table->string('status');
+            $table->string('emotion')->nullable();
             $table->timestamps();
         });
     }

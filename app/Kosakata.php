@@ -11,5 +11,8 @@ class Kosakata extends Model
     protected $fillable = ['user_id',
                             'bahasa',
                             'arti',
+                            'vidio',
+                            'status',
+                            'emotion',
                         ];
 }

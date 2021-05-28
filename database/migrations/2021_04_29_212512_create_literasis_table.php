@@ -18,9 +18,10 @@ class CreateLiterasisTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('nama_buku');
             $table->string('halaman');
-            $table->string('paragraf_awal');
-            $table->string('paragraf_akhir');
+            $table->string('jumlah_paragraf');
             $table->text('vidio');
+            $table->string('emotion')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

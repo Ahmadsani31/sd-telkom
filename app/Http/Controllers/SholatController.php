@@ -59,7 +59,7 @@ class SholatController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = 'mp4';
 
-            $fileNameToStore = preg_replace('/\s+/', '_', $filename . '_' . time() . '.' . $extension);
+            $fileNameToStore = preg_replace('/\s+/', '_', $filename . '_' . $request->nama_sholat . '_' . time() . '.' . $extension);
 
             Storage::disk('public')->putFileAs($path, $file, $fileNameToStore);
             // $fileNameToStore = $filename . '_' . time() . '.' . $extension;
@@ -72,7 +72,8 @@ class SholatController extends Controller
                     'jadwal_sholat' => $request->waktu_sholat,
                     'waktu_sholat' => Carbon::now()->format('H:i'),
                     'vidio_sholat' => $fileNameToStore,
-                    'rating' => $request->rating
+                    'emotion' => $request->star,
+                    'status' => 0,
                 ];
                 $nilai =  Sholat::create($data);
                     Alert::success('Congratulations', 'Waktu Sholat Berhasil Diinput')->persistent(false)->autoClose(3000);

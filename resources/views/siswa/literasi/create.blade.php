@@ -1,35 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<style type="text/css">
-    .main-section{
-        margin:0 auto;
-        padding: 20px;
-        margin-top: 15px;
-        float: left;
-        background-color: #fff;
-        box-shadow: 0px 0px 10px #c1c1c1;
-    }
-
-    #results { display:inline-block; margin:10px; padding:10px; border:1px solid; background:oldlace; }
-    .center {
-            margin: 0 auto;
-            position: relative;
-            top: 50%;
-            padding-left: 25%;
-            padding-right: 25%;
-
-        }
-</style>
 
     <!--======== Page Title and Breadcrumbs Start ========-->
-    <div class="top-page-header">
+    <div class="top-page-header" style="background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);">
 
         <div class="page-title">
             <h2>Sudah Membaca Hari Ini</h2>
-            <small>{{ Auth::user()->name }}</small>
+            <small>Jangan lupa membaca karena dengan membaca bikin ilmu pengetahuan kita luas seluas alam semseta</small>
         </div>
-
+        <div class="page-breadcrumb">
+            <nav class="c_breadcrumbs">
+                <ul>
+                    <li><a href="#">home</a></li>
+                    <li class="active"><a href="#">Literasi</a></li>
+                </ul>
+            </nav>
+        </div>
 
 
 
@@ -40,70 +27,34 @@
 
     <div class="row">
 
-        <div class="col-md-12">
-
-            <div class="row">
-
-                <div class="col-md-12">
+        <div class="col-md-12" >
 
                     <div class="c_panel">
                         <div class="c_title">
-                            <h2>Form Literasi</h2>
+                            <h2>{{ Auth::user()->name }}</h2>
                             <div class="clearfix"></div>
                         </div><!--/.c_title-->
                         <div class="c_content">
                             <form class="form-horizontal" id="formLiterasi" name="formLiterasi" enctype="multipart/form-data">
-                                <div class="modal" id="modalRating1" data-easein="bounceInDown" data-easeout="bounceOutDown" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
-                                    <div class="modal-dialog modal-full">
-                                      <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="card">
-                                                        <div class="rating">
-                                                            <input type="radio" name="star" class="nana" id="star1" data-id="3" value="3">
-                                                                <label for="star1">
-                                                                    <img src="{{ asset('rating-emoji/senang.gif') }}" class="img-responsive">
-                                                                    <h4 class="text-emoji">Senang</h4>
-                                                                </label>
-                                                            <input type="radio" name="star" class="nana" id="star2" data-id="2" value="2" checked>
-                                                                <label for="star2">
-                                                                    <img src="{{ asset('rating-emoji/marah.gif') }}" class="img-responsive">
-                                                                    <h4 class="text-emoji">Marah</h4>
-                                                                </label>
-                                                            <input type="radio" name="star" class="nana" id="star3" data-id="1" value="1">
-                                                                <label for="star3">
-                                                                    <img src="{{ asset('rating-emoji/sedih.gif') }}" class="img-responsive">
-                                                                    <h4 class="text-emoji">Sedih</h4>
-                                                                </label>
-                                                                <h3 class="text">What Are You Feeling Kids</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                @include('siswa.emoji')
+                                <input type="hidden" name="star" id="star" value="">
 
-                                            </div>
-
-                                        </div>
-
-                                      </div>
-                                    </div>
-                                  </div>
-                                <div class="form-group has-success">
+                                <div class="form-group">
                                     <label for="cname" class="control-label col-sm-2">Name Buku</label>
                                     <div class="col-sm-10">
                                         <input class=" form-control input-lg" name="nama_buku" id="nama_buku" type="text" required />
                                     </div>
                                 </div>
-                                <div class="form-group has-success">
+                                <div class="form-group">
                                     <label for="cname" class="control-label col-sm-2">Halaman</label>
                                     <div class="col-sm-10">
                                         <input class=" form-control input-lg" name="halaman" id="halaman" type="text" required />
                                     </div>
                                 </div>
-                                <div class="form-group has-success">
+                                <div class="form-group">
                                     <label for="cname" class="control-label col-sm-2">Jumlah Paragraf</label>
                                     <div class="col-sm-10">
-                                        <input class=" form-control input-lg" name="halaman" id="halaman" type="text" required />
+                                        <input class=" form-control input-lg" name="jumlah_paragraf" id="jumlah_paragraf" type="text" required />
                                     </div>
                                 </div>
 
@@ -141,9 +92,6 @@
 
                             </form>
 
-                        </div><!--/.c_content-->
-                    </div><!--/.c_panel-->
-
                 </div><!--/col-md-12-->
 
             </div><!--/row-->
@@ -176,32 +124,14 @@
         }, delayMs);
     });
 
-    $('body').on('click', '#star1', function () {
-        $('#modalRating1').modal('hide');
+    $('body').on('click', '.nana', function () {
+        setTimeout(function(){
+            $('#modalRating1').modal('hide');
+        }, 1000);
         var rat = $(this).data("id");
-        $('#rating').val(rat);
+        console.log(rat)
+        $('#star').val(rat);
 
-    });
-    $('body').on('click', '#star2', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-
-    });
-    $('body').on('click', '#star3', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-    });
-    $('body').on('click', '#star4', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
-    });
-    $('body').on('click', '#star5', function () {
-        $('#modalRating1').modal('hide');
-        var rat = $(this).data("id");
-        $('#rating').val(rat);
     });
 
         let exampleVidio = document.getElementById("exampleVidio");
@@ -288,18 +218,19 @@ if (startButton) {
             type: "video/webm/mp4"
             });
             recording.src = URL.createObjectURL(recordedBlob);
+
             var nama_buku = $('#nama_buku').val();
             var halaman = $('#halaman').val();
-            var p_awal = $('#p_awal').val();
-            var p_akhir = $('#p_akhir').val();
+            var jumlah_paragraf = $('#jumlah_paragraf').val();
+            var star = $('#star').val();
 
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
             formData.append('video', recordedBlob);
+            formData.append('star', star);
 
             formData.append('nama_buku', nama_buku);
             formData.append('halaman', halaman);
-            formData.append('p_awal', p_awal);
-            formData.append('p_akhir', p_akhir);
+            formData.append('jumlah_paragraf', jumlah_paragraf);
 
 
             // downloadLocalButton.href = recording.src;
@@ -342,19 +273,18 @@ if (startButtonAgain) {
             type: "video/webm"
             });
             recording.src = URL.createObjectURL(recordedBlob);
-
             var nama_buku = $('#nama_buku').val();
             var halaman = $('#halaman').val();
-            var p_awal = $('#p_awal').val();
-            var p_akhir = $('#p_akhir').val();
+            var jumlah_paragraf = $('#jumlah_paragraf').val();
+            var star = $('#star').val();
 
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
             formData.append('video', recordedBlob);
+            formData.append('star', star);
 
             formData.append('nama_buku', nama_buku);
             formData.append('halaman', halaman);
-            formData.append('p_awal', p_awal);
-            formData.append('p_akhir', p_akhir);
+            formData.append('jumlah_paragraf', jumlah_paragraf);
 
 
             // downloadLocalButton.href = recording.src;
@@ -381,9 +311,9 @@ if (downloadButton) {
         processData: false,
         contentType: false,
         success: function (res) {
-            if(res.success){
-                location.reload();
-            }
+            // if(res.success){
+            //     location.reload();
+            // }
             window.location.href = "{{ route('siswa.home') }}";
         }
         });

@@ -28,6 +28,7 @@ class LiterasiController extends Controller
 
         if ($request->hasFile('video')) {
 
+            // dd($request->star);
             $file = $request->file('video');
             $path = 'literasi/';
             // $destinationPath = 'images/vidio/';
@@ -47,13 +48,16 @@ class LiterasiController extends Controller
                 'user_id' => Auth::user()->id,
                 'nama_buku' => Str::title($request->nama_buku),
                 'halaman' => $request->halaman,
-                'paragraf_awal' => $request->p_awal,
-                'paragraf_akhir' => $request->p_akhir,
+                'jumlah_paragraf' => $request->jumlah_paragraf,
                 'vidio' => $fileNameToStore,
+                'emotion' => $request->star,
+                'status' => 0,
             ];
-                $nilai =  Literasi::create($data);
+                Literasi::create($data);
                     Alert::success('Congratulations', 'Data Literasi Berhasil Diinput')->persistent(false)->autoClose(3000);
-                    return response()->json($nilai);
+                    // return response()->json($data);/
+                return json_encode(['success'=>'Data input successfully.'],200);
+
         }
     }
 
@@ -63,6 +67,6 @@ class LiterasiController extends Controller
         \File::delete('images/literasi/'.$data->cover_buku);
         Literasi::findOrFail($id)->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with();
     }
 }

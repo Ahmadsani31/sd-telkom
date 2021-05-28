@@ -11,4 +11,14 @@ class BioOrtu extends Model
     protected $table = 'bio_ortus';
 
     protected $guarded =[];
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
+    public function siswa()
+    {
+        return $this->hasOne(User::class,'id','siswa_id');
+    }
 }

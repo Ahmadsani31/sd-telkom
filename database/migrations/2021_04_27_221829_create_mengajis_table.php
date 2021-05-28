@@ -20,7 +20,9 @@ class CreateMengajisTable extends Migration
             $table->string('nama_surat');
             $table->bigInteger('ayat_awal');
             $table->bigInteger('ayat_akhir');
-            $table->text('vidio_ngaji');
+            $table->text('vidio_ngaji')->nullable();
+            $table->string('emotion')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

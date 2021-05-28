@@ -1,40 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<style type="text/css">
-    .main-section{
-        margin:0 auto;
-        padding: 20px;
-        margin-top: 15px;
-        float: left;
-        background-color: #fff;
-        box-shadow: 0px 0px 10px #c1c1c1;
-    }
 
-    #results { display:inline-block; margin:10px; padding:10px; border:1px solid; background:oldlace; }
-    .center {
-        margin: 0 auto;
-            position: relative;
-            top: 50%;
-            padding-left: 25%;
-            padding-right: 25%;
-
-        }
-</style>
-<link rel="stylesheet" href="{{ asset('rating-emoji/main.css') }}">
     <!--======== Page Title and Breadcrumbs Start ========-->
-    <div class="top-page-header">
+    <div class="top-page-header" style="background: linear-gradient(0deg, #e3ffe7 0%, #d9e7ff 100%);">
 
         <div class="page-title">
-            <h2>Thema Form Elements</h2>
-            <small>Thema form elements.</small>
+            <h2>Mengaji</h2>
+            <small>Jangan Lupa siap sholat kita ngaji</small>
         </div>
         <div class="page-breadcrumb">
             <nav class="c_breadcrumbs">
                 <ul>
-                    <li><a href="#">Thema</a></li>
-                    <li><a href="#">Form Components</a></li>
-                    <li class="active"><a href="#">Form Elements</a></li>
+                    <li><a href="#">home</a></li>
+                    <li class="active"><a href="#">Mengaji</a></li>
                 </ul>
             </nav>
         </div>
@@ -46,9 +25,6 @@
 
     <!--======== Form Elements Content Start End ========-->
 
-    <div class="row">
-
-        <div class="col-md-12">
 
             <div class="row">
 
@@ -56,70 +32,36 @@
 
                     <div class="c_panel">
                         <div class="c_title">
-                            <h2>Basic Form</h2>
+                            <h2>{{ Auth::user()->name }}</h2>
                             <div class="clearfix"></div>
                         </div><!--/.c_title-->
                         <div class="c_content">
                             <form class="form-horizontal" id="formMengaji" name="formMengaji" enctype="multipart/form-data">
-                                <input type="hidden" name="rating" id="rating" value="">
+                                <input type="hidden" name="star" id="star" value="">
                                 <input type="hidden" name="rating" id="surat1" value="">
                                 <input type="hidden" name="rating" id="ayat11" value="">
                                 <input type="hidden" name="rating" id="ayat22" value="">
-                                <div class="modal" id="modalRating1" data-easein="bounceInDown" data-easeout="bounceOutDown" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
-                                    <div class="modal-dialog modal-full">
-                                      <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="card">
-                                                        <div class="rating">
-                                                            <input type="radio" name="star" class="nana" id="star1" data-id="3" value="3">
-                                                                <label for="star1">
-                                                                    <img src="{{ asset('rating-emoji/senang.gif') }}" class="img-responsive">
-                                                                    <h4 class="text-emoji">Senang</h4>
-                                                                </label>
-                                                            <input type="radio" name="star" class="nana" id="star2" data-id="2" value="2" checked>
-                                                                <label for="star2">
-                                                                    <img src="{{ asset('rating-emoji/marah.gif') }}" class="img-responsive">
-                                                                    <h4 class="text-emoji">Marah</h4>
-                                                                </label>
-                                                            <input type="radio" name="star" class="nana" id="star3" data-id="1" value="1">
-                                                                <label for="star3">
-                                                                    <img src="{{ asset('rating-emoji/sedih.gif') }}" class="img-responsive">
-                                                                    <h4 class="text-emoji">Sedih</h4>
-                                                                </label>
-                                                                <h3 class="text">What Are You Feeling Kids</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                      </div>
-                                    </div>
-                                  </div>
-                                <div class="form-group has-success">
+                                @include('siswa.emoji')
+                                <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Surat</label>
                                     <div class="col-sm-10">
                                         <select class="select2 input-lg" id="surat" name="surat" required>
                                             <option selected>--Pilih Surat--</option>
                                             <optgroup label="Surat Alquran">
-                                                @foreach ($surat as $surah)
-                                                <option value="{{ $surah['nomor'] }}">{{ $surah['nama'] }}</option>
+                                                @foreach ($surat as $su)
+                                                <option value="{{ $su->id }}">{{ $su->nama_ayat }}</option>
                                                 @endforeach
                                             </optgroup>
                                         </select>
                                     </div>
                                 </div>
-                                        <div class="form-group has-success">
+                                        <div class="form-group ">
                                             <label class="col-sm-2 control-label">Bacaan Ayat</label>
                                                 <div class="col-sm-4">
                                             <select class="select2 input-lg" id="ayat1" name="ayat1" required>
-                                                <option selected>--Ayat Pertama--</option>
+                                                <option selected>--Loading--</option>
                                                 <optgroup label="Pilih Ayat">
-                                                    <option selected>--Ayat Pertama--</option>
+                                                    <option selected>--Ayat Awal--</option>
 
                                                 </optgroup>
                                             </select>
@@ -127,8 +69,9 @@
                                         <label class="col-sm-2 control-label">Sampai Dengan</label>
                                         <div class="col-sm-4">
                                             <select class="select2 input-lg" id="ayat2" name="ayat2" required>
-                                                <option selected>--Ayat Akhir--</option>
+                                                <option selected>--Loading--</option>
                                                 <optgroup label="Pilih Ayat">
+                                                    <option selected>--Ayat Akhir--</option>
 
                                                 </optgroup>
                                             </select>
@@ -175,9 +118,6 @@
 
             </div><!--/row-->
 
-        </div><!--/col-md-6-->
-
-    </div><!--/row-->
 
     <!--======== Form Elements Content Start End ========-->
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
@@ -424,12 +364,12 @@ if (stopButton) {
                         type:"GET",
                         dataType:"json",
                         success:function(data){
-                            console.log(data[0].nama)
+                            console.log(data.jumlah_ayat)
                             $('select[name="ayat1"]').empty();
                             $('select[name="ayat2"]').empty();
                         $.each(data, function(key, value){
 
-                            for (var i = 1; i <= data[0].ayat; i++) {
+                            for (var i = 1; i <= data.jumlah_ayat; i++) {
                                 $("#ayat1").append( '<option value="'+i+'">Ayat ['+i+']</option>' );
 
                             }
@@ -437,7 +377,7 @@ if (stopButton) {
                         });
                         $.each(data, function(key, value){
 
-                            for (var i = 1; i <= data[0].ayat; i++) {
+                            for (var i = 1; i <= data.jumlah_ayat; i++) {
                                 $("#ayat2").append( '<option value="'+i+'">Ayat ['+i+']</option>' );
 
                             }

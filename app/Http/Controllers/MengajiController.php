@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Alquran;
 use App\Mengaji;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class MengajiController extends Controller
 
     public function getAyat($id)
     {
-        $ayat = Http::get('https://api.banghasan.com/quran/format/json/surat/'.$id)->json()['hasil'];
+        $ayat = Alquran::findOrFail($id);
 
         return json_encode($ayat);
     }
@@ -44,7 +45,7 @@ class MengajiController extends Controller
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = 'mp4';
 
-            $fileNameToStore = preg_replace('/\s+/', '_', $filename . '_' . time() . '.' . $extension);
+            $fileNameToStore = preg_replace('/\s+/', '_', $filename . '_' .'mengaji'. '_' . time() . '.' . $extension);
 
             Storage::disk('public')->putFileAs($path, $file, $fileNameToStore);
             // $fileNameToStore = $filename . '_' . time() . '.' . $extension;
@@ -58,18 +59,21 @@ class MengajiController extends Controller
                 'ayat_awal' => $request->ayat1,
                 'ayat_akhir' => $request->ayat2,
                 'vidio_ngaji' => $fileNameToStore,
+                'emotion' => $request->star,
+                'status' => 0,
             ];
                 $nilai =  Mengaji::create($data);
                     Alert::success('Congratulations', 'Data Mengaji Berhasil Diinput')->persistent(false)->autoClose(3000);
-                    return response()->json($nilai);
+                    // return response()->json($nilai);
+                    return json_encode(['success'=>'Data input successfully.']);
 
-            // return  response()->json(['success' => ($media) ? 1 : 0, 'message' => ($media) ? 'Video uploaded successfully.' : "Some thing went wrong. Try again !."]);
+            // return  response()->json(['success' => ($nilai) ? 1 : 0, 'message' => ($nilai) ? 'Video uploaded successfully.' : "Some thing went wrong. Try again !."]);
         }
     }
 
     public function created()
     {
-        $surat = Http::get('https://api.banghasan.com/quran/format/json/surat')->json()['hasil'];
+        $surat = Alquran::all();
 
         return view('siswa.mengaji.created', compact('surat'));
         // return view('mengaji.created');

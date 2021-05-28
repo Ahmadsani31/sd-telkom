@@ -12,7 +12,7 @@ class BioSiswa extends Model
 
     protected $guarded =[];
 
-    public function siswa()
+    public function user()
     {
         return $this->hasOne(User::class,'id','user_id');
     }

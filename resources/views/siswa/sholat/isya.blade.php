@@ -1,35 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<style type="text/css">
-    .main-section{
-        margin:0 auto;
-        padding: 20px;
-        margin-top: 15px;
-        float: left;
-        background-color: #fff;
-        box-shadow: 0px 0px 10px #c1c1c1;
-    }
 
-    #results { display:inline-block; margin:10px; padding:10px; border:1px solid; background:oldlace; }
-    .center {
-            margin: 0 auto;
-            position: relative;
-            top: 50%;
-            padding-left: 25%;
-            padding-right: 25%;
-
-        }
-</style>
-<link rel="stylesheet" href="{{ asset('rating-emoji/main.css') }}">
 <!--======== Page Title and Breadcrumbs Start ========-->
-        <div class="top-page-header" style="background-color: rgb(26, 236, 201)">
+        <div class="top-page-header" style="background-image: linear-gradient(0deg, #e5ffde 0%, #B5FFFC 100%);">
 
             <div class="page-title">
                 <h2>Jadwal Sholat</h2>
                 <small>Kerjakan lah sholat dengan tepat waktu untuk pahala yang besar.</small>
             </div>
-
+            <div class="page-breadcrumb">
+                <nav class="c_breadcrumbs">
+                    <ul>
+                        <li><a href="#">home</a></li>
+                        <li class="active"><a href="#">Sholat Isya</a></li>
+                    </ul>
+                </nav>
+            </div>
 
         </div>
         <!--======== Page Title and Breadcrumbs End ========-->
@@ -37,7 +24,7 @@
         <!--======== Table Content Start ========-->
         <div class="row" >
             <div class="col-md-12">
-                <div class="c_panel" style="background-color: rgb(26, 236, 201)">
+                <div class="c_panel" style="background-image: linear-gradient(0deg, #e5ffde 0%, #B5FFFC 100%);">
                     <div class="c_content">
                         <table class="table  table-hover general-table">
                             <thead>
@@ -65,7 +52,7 @@
                 </div><!--/.c_panels-->
             </div><!--/col-md-12-->
             <div class="col-md-12">
-                <div class="c_panel">
+                <div class="c_panel" style="background-image: linear-gradient(0deg, #e5ffde 0%, #B5FFFC 100%);">
                     <div class="c_title">
                         <h1><strong>Sholat Isya</strong></h1>
                         <span class="text-center">please click shortcut image to take vidio</span>
@@ -75,43 +62,9 @@
                     <div class="c_content">
                         <form action="" class="form-horizontal" enctype="multipart/form-data">
                             <input type="hidden" name="nama_sholat" id="sholat" value="isya">
-                            <input type="hidden" name="rating" id="rating" value="">
+                            <input type="hidden" name="star" id="star" value="">
                             <input type="hidden" name="waktu_sholat" id="waktu_sholat" value="{{ $schedule['isya']}}">
-                            <div class="modal" id="modalRating1" data-easein="bounceInDown" data-easeout="bounceOutDown" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
-                                <div class="modal-dialog modal-full">
-                                  <div class="modal-content">
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="rating">
-                                                        <input type="radio" name="star" class="nana" id="star1" data-id="3" value="3">
-                                                            <label for="star1">
-                                                                <img src="{{ asset('rating-emoji/senang.gif') }}" class="img-responsive">
-                                                                <h4 class="text-emoji">Senang</h4>
-                                                            </label>
-                                                        <input type="radio" name="star" class="nana" id="star2" data-id="2" value="2" checked>
-                                                            <label for="star2">
-                                                                <img src="{{ asset('rating-emoji/marah.gif') }}" class="img-responsive">
-                                                                <h4 class="text-emoji">Marah</h4>
-                                                            </label>
-                                                        <input type="radio" name="star" class="nana" id="star3" data-id="1" value="1">
-                                                            <label for="star3">
-                                                                <img src="{{ asset('rating-emoji/sedih.gif') }}" class="img-responsive">
-                                                                <h4 class="text-emoji">Sedih</h4>
-                                                            </label>
-                                                            <h3 class="text">What Are You Feeling Kids</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                  </div>
-                                </div>
-                              </div>
+                            @include('siswa.emoji')
                               <div class="form-group">
                                 <div class="col-sm-12" >
 
@@ -177,7 +130,7 @@ $(document).ready(function(){
         }, 1000);
         var rat = $(this).data("id");
         console.log(rat)
-        $('#rating').val(rat);
+        $('#star').val(rat);
 
     });
 
@@ -199,8 +152,8 @@ var localstream;
 
 // nilai
 
-var rating = $('#rating').val();
-console.log(rating)
+var star = $('#star').val();
+console.log(star)
 
 var nama_sholat = $('#sholat').val();
 var waktu_sholat = $('#waktu_sholat').val();
@@ -271,11 +224,11 @@ if (startButton) {
             type: "video/webm/mp4"
             });
             recording.src = URL.createObjectURL(recordedBlob);
-            var rating = $('#rating').val();
+            var star = $('#star').val();
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
             formData.append('video', recordedBlob);
 
-            formData.append('rating', rating);
+            formData.append('star', star);
             formData.append('nama_sholat', nama_sholat);
             formData.append('waktu_sholat', waktu_sholat);
 
@@ -321,11 +274,11 @@ if (startButtonAgain) {
             });
             recording.src = URL.createObjectURL(recordedBlob);
 
-            var rating = $('#rating').val();
+            var star = $('#star').val();
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
             formData.append('video', recordedBlob);
 
-            formData.append('rating', rating);
+            formData.append('star', star);
             formData.append('nama_sholat', nama_sholat);
             formData.append('waktu_sholat', waktu_sholat);
 

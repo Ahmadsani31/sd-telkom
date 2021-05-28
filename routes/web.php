@@ -83,6 +83,8 @@ Route::group(['prefix' => 'siswa'], function(){
 
 Route::group(['prefix' => 'guru'], function(){
     Route::get('home','GuruController@index')->name('guru.home')->middleware('guru');
+
+
 });
 
 Route::group(['prefix' => 'admin'], function(){
@@ -92,4 +94,13 @@ Route::group(['prefix' => 'admin'], function(){
 Route::group(['prefix' => 'ortu'], function(){
     Route::get('home','OrtuController@index')->name('ortu.home')->middleware('ortu');
     Route::get('anak/index','OrtuAnakController@index')->name('ortu-anak.index')->middleware('ortu');
+    Route::get('anak/sholat','OrtuAnakController@sholat')->name('ortu-anak.sholat')->middleware('ortu');
+    Route::get('anak/mengaji','OrtuAnakController@mengaji')->name('ortu-anak.mengaji')->middleware('ortu');
+    Route::get('anak/literasi','OrtuAnakController@literasi')->name('ortu-anak.literasi')->middleware('ortu');
+    Route::get('anak/kosakata','OrtuAnakController@kosaKata')->name('ortu-anak.kosakata')->middleware('ortu');
+
+    Route::get('/home/sholat/{id}', 'OrtuController@getVidioSholat')->name('getVideoSholat');
+    Route::get('/home/mengaji/{id}', 'OrtuController@getVidioNgaji')->name('getVideoNgaji');
+    Route::get('/home/literasi/{id}', 'OrtuController@getVidioLiterasi')->name('getVideoLiterasi');
+
 });

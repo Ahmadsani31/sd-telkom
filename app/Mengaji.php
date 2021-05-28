@@ -14,5 +14,12 @@ class Mengaji extends Model
                             'ayat_awal',
                             'ayat_akhir',
                             'vidio_ngaji',
+                            'status',
                         ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
 }

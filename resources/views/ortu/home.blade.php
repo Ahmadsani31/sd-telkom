@@ -10,19 +10,11 @@
                     <img src="{{ asset('assets/images/users/image-user.jpg') }}" alt="image"/>
                 </div>
             </div>
-            <div class="col-md-12 profile-info">
-                <div class=" profile-info-value">
-                    <h3>800</h3>
-                    <p>Followers</p>
+            <div class="col-md-12 profile-info" style="padding-bottom: 10px">
+                <div class=" profile-info-value ">
+                   <span class="label label-wet-asphalt font-size-24"> {{ Auth::user()->name }}</span>
                 </div>
-                <div class=" profile-info-value">
-                    <h3>1520</h3>
-                    <p>Friends</p>
-                </div>
-                <div class=" profile-info-value">
-                    <h3>340</h3>
-                    <p>Photos</p>
-                </div>
+
             </div>
         </div>
     </div>
@@ -34,80 +26,120 @@
 
     <div class="clearfix"></div>
 
-    <div class="row margin-top-70">
+    <div class="row margin-top-20">
         <div class="top-page-header">
 
             <div class="page-title">
-                <h2>Nama Anak</h2>
-                <small>{{ Auth::user()->name }}</small>
+                <h3>Nama Anak</h3>
+                <span class="label label-wet-asphalt">{{ $siswa->name }}</span>
             </div>
 
 
         </div>
         <!--End Left Sidebar-->
         <div class="row">
+            <!--Left Sidebar-->
 
-            <div class="col-md-12">
-
-                <div class="c_panel">
-
-                    <div class="c_title">
-                        <h2>General Table</h2>
-
-                        <div class="clearfix"></div>
-                    </div><!--/.c_title-->
-
-                    <div class="c_content">
-
-                        <table class="table  table-hover general-table">
-                            <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>User</th>
-                                <th>Sholat</th>
-                                <th>Waktu</th>
-
-                                <th>Tanggal</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                                @php
-                                    $no=1;
-                                @endphp
+            <div class="col-md-12 padding-top-20">
 
 
-                                @foreach ($sholat as $lat)
+                <div class="page-ecommerce">
+                    <div class="row" style="height: 30%">
+
+                        <div class="col-md-3 ">
+
+                            <div class="widget disable">
+                                <div class="widget-content bg-white">
+                                    <div class="row padding-10">
+                                        <div class="col-xs-8">
+                                            <h3 class="font-bold font-size-30">Sholat</h3>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <p class="font-size-38"><img src="{{ asset('images/sholat.png') }}" alt="sholat"  class="img-responsive"></p>
+                                        </div>
+                                    </div>
+                                    <p class="margin-left-10 margin-right-10 font-size-18 padding-bottom-10"><span class="label label-wet-asphalt">{{ $siswa->name }}</span></p>
+                                        <a href="{{ route('ortu-anak.sholat') }}" id="" class="btn padding-8 hvr-bounce-to-right bg-sun-flower" style="width:100%;">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+
+                               </div><!--/widget-content-->
+                            </div><!--/widget-->
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="widget">
+                                <div class="widget-content bg-white">
+                                    <div class="row padding-10">
+                                        <div class="col-xs-8">
+                                            <h3 class="font-bold font-size-30">Mengaji</h3>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <p class="font-size-38"><img src="{{ asset('images/mengaji.png') }}" alt="sholat"  class="img-responsive"></p>
+                                        </div>
+                                    </div>
+                                    <p class="margin-left-10 margin-right-10 font-size-18 padding-bottom-10"><span class="label label-wet-asphalt">{{ $siswa->name }}</span></p>
+
+                                    <a href="{{ route('ortu-anak.mengaji') }}" class="btn padding-8 hvr-bounce-to-right bg-green-sea" style="width:100%;">Laksanakan <i class="fa fa-arrow-circle-right"></i></a>
+                                </div><!--/widget-content-->
+                            </div><!--/widget-->
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="widget">
+                                <div class="widget-content bg-white">
+                                    <div class="row padding-10">
+                                        <div class="col-xs-8">
+                                            <h3 class="font-bold font-size-30">Literasi</h3>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <p class="font-size-38"><img src="{{ asset('images/literasi.png') }}" alt="sholat"  class="img-responsive"></p>
+                                        </div>
+                                    </div>
+                                    <p class="margin-left-10 margin-right-10 font-size-18 padding-bottom-10"><span class="label label-wet-asphalt">{{ $siswa->name }}</span></p>
+
+                                    <a href="{{ route('ortu-anak.literasi') }}" class="btn padding-8 hvr-bounce-to-right bg-amethyst" style="width:100%;">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+                                 </div><!--/widget-content-->
+                            </div><!--/widget-->
+
+                        </div>
+                        <div class="col-md-3">
+
+                            <div class="widget">
+                                <div class="widget-content bg-white">
+                                    <div class="row padding-10">
+                                        <div class="col-xs-8">
+                                            <h3 class="font-bold font-size-30">Kosa Kata</h3>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <p class="font-size-38"><img src="{{ asset('images/kosakata.png') }}" alt="sholat"  class="img-responsive"></p>
+                                        </div>
+                                    </div>
+                                    <p class="margin-left-10 margin-right-10 font-size-18 padding-bottom-10"><span class="label label-wet-asphalt">{{ $siswa->name }}</span></p>
+
+                                    <a href="{{ route('ortu-anak.kosakata') }}" class="btn  padding-8 hvr-bounce-to-right bg-carrot" style="width:100%;">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+                                 </div><!--/widget-content-->
+                            </div><!--/widget-->
+
+                        </div>
+
+                    </div><!-- .row -->
 
 
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">{{ $no++ }}</th>
-                                        <td rowspan="2">{{ $lat->user_id}}</td>
 
 
-                                        <td>{{ $lat->nama_sholat }}</td>
-                                        <td>{{ $lat->waktu_sholat }}</td>
-                                        <td>{{ $lat->created_at->format('D, d M y') }}</td>
-                                        <td>
-                                            <a href=""class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
 
-                                @endforeach
-
-
-                        </table>
-                        {{ $sholat->links() }}
-
-                    </div><!--/.c_content-->
-
-                </div><!--/.c_panels-->
+                </div><!--/all-projects-->
 
 
             </div><!--/col-md-12-->
+    {{-- <a href="{{ route('vidio-test') }}" class="btn btn-primary">test</a> --}}
+            <!--End Left Sidebar-->
 
-        </div><!--/row-->
+        </div>
+
 
     </div>
 

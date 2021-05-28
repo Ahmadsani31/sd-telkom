@@ -11,8 +11,14 @@ class Literasi extends Model
     protected $fillable = ['user_id',
                             'nama_buku',
                             'halaman',
-                            'paragraf_awal',
-                            'paragraf_akhir',
+                            'jumlah_paragraf',
                             'vidio',
+                            'emotion',
+                            'status',
                         ];
+    public function user()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
 }

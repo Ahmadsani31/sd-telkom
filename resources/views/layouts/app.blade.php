@@ -81,7 +81,7 @@
             <div class="brand">
 
                 <a href="{{ route('home') }}" class="logo">
-                    SD-TELKOM
+                    <strong>SD-TELKOM</strong>
                 </a>
 
             </div>
